@@ -1,6 +1,5 @@
 import "./App.css";
 import Calendar from "./components/Calendar";
-import Card from "./components/Card";
 import Column from "./components/Column";
 import Header from "./components/Header";
 import Main from "./components/Main";
@@ -8,6 +7,9 @@ import Main from "./components/Main";
 import PopBrowse from "./components/popups/popBrowse";
 import PopExit from "./components/popups/popExit";
 import PopNewCard from "./components/popups/popNewCard";
+
+import { testCardData } from "../data";
+import filterCardsByStatus from "./utils/cardFilter";
 
 function App() {
   const statuses = [
@@ -17,6 +19,8 @@ function App() {
     "Тестирование",
     "Готово",
   ];
+  // returned [ {status, data: [filtred cards]}, ...n ]
+  const filtredCards = filterCardsByStatus(statuses, testCardData);
 
   return (
     <>
@@ -26,28 +30,17 @@ function App() {
         <PopNewCard>
           <Calendar />
         </PopNewCard>
-        
+
         <PopBrowse>
           <Calendar />
         </PopBrowse>
 
         <Header />
+
         <Main>
-          <Column status={statuses[0]}>
-            <Card />
-          </Column>
-          <Column status={statuses[1]}>
-            <Card />
-          </Column>
-          <Column status={statuses[2]}>
-            <Card />
-          </Column>
-          <Column status={statuses[3]}>
-            <Card />
-          </Column>
-          <Column status={statuses[4]}>
-            <Card />
-          </Column>
+          {filtredCards.map((card) => (
+            <Column key={card.status} status={card.status} cards={card.data} />
+          ))}
         </Main>
       </div>
 

@@ -19,7 +19,7 @@ function App() {
     "Тестирование",
     "Готово",
   ];
-  // returned [ {status, data: [filtred cards]}, ...n ]
+  // returned [ { status, data: [filtred cards] }, ...n ]
   const filtredCards = filterCardsByStatus(statuses, testCardData);
 
   return (

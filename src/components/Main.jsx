@@ -1,13 +1,9 @@
-import { useEffect } from "react";
 import { useState } from "react";
 
 export default function Main({ children }) {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 3000);
-  }, []);
-
+  setTimeout(() => setLoading(false), 3000);
   return (
     <main className="main">
       <div className="container">

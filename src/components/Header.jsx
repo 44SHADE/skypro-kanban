@@ -1,4 +1,16 @@
+import { useState } from "react";
+
 export default function Header() {
+  const [popVisible, setPopVisible] = useState(false);
+
+  function popUserVisible(e) {
+    const target = e.target.nextSibling;
+    popVisible
+      ? (target.style.display = "none")
+      : (target.style.display = "block");
+    setPopVisible(!popVisible);
+  }
+
   return (
     <header className="header">
       <div className="container">
@@ -17,13 +29,10 @@ export default function Header() {
             <button className="header__btn-main-new _hover01" id="btnMainNew">
               <a href="#popNewCard">Создать новую задачу</a>
             </button>
-            <a href="#user-set-target" className="header__user _hover02">
+            <a className="header__user _hover02" onClick={popUserVisible}>
               Ivan Ivanov
             </a>
-            <div
-              className="header__pop-user-set pop-user-set"
-              id="user-set-target"
-            >
+            <div className="header__pop-user-set pop-user-set">
               <a href="">x</a>
               <p className="pop-user-set__name">Ivan Ivanov</p>
               <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>

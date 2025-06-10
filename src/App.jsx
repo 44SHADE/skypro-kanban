@@ -1,12 +1,8 @@
-import "./App.css";
-import Calendar from "./components/Calendar";
 import Column from "./components/Column";
 import Header from "./components/Header/Header";
 import Main from "./components/Main";
 import Wrapper from "./components/Wrapper";
 
-import PopBrowse from "./components/popups/popBrowse";
-import PopNewCard from "./components/popups/popNewCard";
 import PopExit from "./components/popups/popExit/popExit";
 
 import { testCardData } from "../data";
@@ -29,14 +25,6 @@ function App() {
   return (
       <Wrapper>
         {showPop && <PopExit />}
-
-        <PopNewCard>
-          <Calendar />
-        </PopNewCard>
-
-        <PopBrowse>
-          <Calendar />
-        </PopBrowse>
 
         <Header onShow={() => setShowPop(!showPop)}/>
 

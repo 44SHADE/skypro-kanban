@@ -1,19 +1,12 @@
-import { SCardsItem, SCardsCard, SCardContent, SCardGroup, CardTheme, CardTitle, CardDate } from "./card.style";
-
-const cardCategory = {
-  "Web Design": "_orange",
-  "Research": "_green",
-  "Copywriting": "_purple",
-};
+import { SCardsItem, SCardsCard, SCardContent, SCardGroup, CardTitle, CardDate } from "./_card.style";
+import CardTheme from "./CardTheme";
 
 export default function Card({ id, theme, title, date }) {
   return (
     <SCardsItem key={id}>
       <SCardsCard>
         <SCardGroup>
-          <CardTheme className={`${cardCategory[theme] || "_gray"}`}>
-            <p className={cardCategory[theme] || "_gray"}>{theme}</p>
-          </CardTheme>
+          <CardTheme theme={theme}/>
           <a href="#popBrowse" target="_self">
             <div className="card__btn">
               <div></div>

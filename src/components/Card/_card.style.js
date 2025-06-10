@@ -48,19 +48,6 @@ const SCardContent = styled.div`
   justify-content: space-between;
 `;
 
-const CardTheme = styled.div`
-  width: auto;
-  height: 20px;
-  padding: 5px 14px;
-  border-radius: 18px;
-
-  & p {
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 10px;
-  }
-`;
-
 const CardTitle = styled.h3`
   font-size: 14px;
   font-weight: 500;
@@ -82,12 +69,12 @@ const CardDate = styled.div`
     letter-spacing: 0.2px;
   }
 `;
+
 export {
   SCardsCard,
   SCardsItem,
   SCardContent,
   SCardGroup,
-  CardTheme,
   CardTitle,
   CardDate,
 };

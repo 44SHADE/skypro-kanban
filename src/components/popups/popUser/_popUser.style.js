@@ -54,28 +54,41 @@ const PopUserSetTheme = styled.div`
     line-height: 21px;
     letter-spacing: -0.14px;
   }
+`;
 
-  & input[type="checkbox"] {
+const InputTheme = styled.input`
   position: relative;
   width: 24px;
   height: 13px;
   border-radius: 100px;
-  background: #EAEEF6;
+  background: #eaeef6;
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 
-  &input[type="checkbox"]::before {
-  content: "";
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background-color: #94A6BE;
-  transition: 0.5s;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: #94a6be;
+    transition: 0.5s;
+  }
+  
+  &:checked[type=checkbox]::before {
+  left: 12px;
+  }
+}
 `;
 
-export {SHeaderPopUser, PopUserSetMail, PopUserSetName, PopUserSetTheme}
+export {
+  SHeaderPopUser,
+  PopUserSetMail,
+  PopUserSetName,
+  PopUserSetTheme,
+  InputTheme,
+};

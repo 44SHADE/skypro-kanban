@@ -6,7 +6,7 @@ import {
   PopExitBtnYes,
   PopExitFormGroup,
   PopExitTTL,
-} from "./popExit.style";
+} from "./_popExit.style";
 
 export default function PopExit() {
   return (

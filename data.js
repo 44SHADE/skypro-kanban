@@ -8,14 +8,14 @@ export const testCardData = [
   },
   {
     id: 2,
-    theme: "Frontend",
+    theme: "Copywriting",
     title: "Создание компонентов",
     date: "02.11.23",
     status: "Нужно сделать",
   },
   {
     id: 3,
-    theme: "Backend",
+    theme: "Research",
     title: "Настройка API",
     date: "05.11.23",
     status: "В работе",

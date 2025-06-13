@@ -1,17 +1,17 @@
-import "./App.css";
-import Calendar from "./components/Calendar";
 import Column from "./components/Column";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import Main from "./components/Main";
+import Wrapper from "./components/Wrapper";
 
-import PopBrowse from "./components/popups/popBrowse";
-import PopExit from "./components/popups/popExit";
-import PopNewCard from "./components/popups/popNewCard";
+import PopExit from "./components/popups/popExit/popExit";
 
 import { testCardData } from "../data";
 import filterCardsByStatus from "./utils/cardFilter";
+import { useState } from "react";
 
 function App() {
+  const [showPop, setShowPop] = useState(false);
+
   const statuses = [
     "Без статуса",
     "Нужно сделать",
@@ -23,29 +23,17 @@ function App() {
   const filtredCards = filterCardsByStatus(statuses, testCardData);
 
   return (
-    <>
-      <div className="wrapper">
-        <PopExit />
+      <Wrapper>
+        {showPop && <PopExit />}
 
-        <PopNewCard>
-          <Calendar />
-        </PopNewCard>
-
-        <PopBrowse>
-          <Calendar />
-        </PopBrowse>
-
-        <Header />
+        <Header onShow={() => setShowPop(!showPop)}/>
 
         <Main>
           {filtredCards.map((card) => (
             <Column key={card.status} status={card.status} cards={card.data} />
           ))}
         </Main>
-      </div>
-
-      {/* <script src="js/script.js"></script> */}
-    </>
+      </Wrapper>
   );
 }
 

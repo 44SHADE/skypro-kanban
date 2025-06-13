@@ -1,11 +1,12 @@
+import { SCardsItem, SCardsCard, SCardContent, SCardGroup, CardTitle, CardDate } from "./_card.style";
+import CardTheme from "./CardTheme";
+
 export default function Card({ id, theme, title, date }) {
   return (
-    <div className="cards__item" key={id}>
-      <div className="cards__card card">
-        <div className="card__group">
-          <div className="card__theme _orange">
-            <p className="_orange">{theme}</p>
-          </div>
+    <SCardsItem key={id}>
+      <SCardsCard>
+        <SCardGroup>
+          <CardTheme theme={theme}/>
           <a href="#popBrowse" target="_self">
             <div className="card__btn">
               <div></div>
@@ -13,12 +14,12 @@ export default function Card({ id, theme, title, date }) {
               <div></div>
             </div>
           </a>
-        </div>
-        <div className="card__content">
+        </SCardGroup>
+        <SCardContent>
           <a href="" target="_blank">
-            <h3 className="card__title">{title}</h3>
+            <CardTitle>{title}</CardTitle>
           </a>
-          <div className="card__date">
+          <CardDate>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="13"
@@ -48,9 +49,9 @@ export default function Card({ id, theme, title, date }) {
               </defs>
             </svg>
             <p>{date}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+          </CardDate>
+        </SCardContent>
+      </SCardsCard>
+    </SCardsItem>
   );
 }

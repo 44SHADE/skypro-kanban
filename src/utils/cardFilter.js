@@ -5,7 +5,3 @@ export default function filterCardsByStatus (statuses, cards) {
         data: cards.filter((card) => card.status === status)
     }))
 }
-
-// export default function getCardsByStatus (status, cards) {
-//     return cards.filter((card) => card.status === status);
-// };

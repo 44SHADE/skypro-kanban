@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   Wrapper,
   ContainerSignUp,
@@ -46,7 +47,7 @@ export default function SignIn() {
               </ModalBtnSignUpEnt>
               <ModalFormGroup>
                 <p>
-                  Уже есть аккаунт? <a>Войдите здесь</a>
+                  Уже есть аккаунт? <Link to="/login">Войдите здесь</Link>
                 </p>
               </ModalFormGroup>
             </ModalFormLogin>

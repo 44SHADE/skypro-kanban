@@ -1,4 +1,7 @@
-export default function PopBrowse({ children }) {
+import { Link } from "react-router-dom";
+import Calendar from "../Calendar";
+
+export default function PopBrowse() {
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
@@ -51,7 +54,7 @@ export default function PopBrowse({ children }) {
               </form>
               <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
-                {children}
+                <Calendar />
               </div>
             </div>
             <div className="theme-down__categories theme-down">
@@ -70,7 +73,7 @@ export default function PopBrowse({ children }) {
                 </button>
               </div>
               <button className="btn-browse__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
+                <Link to="/">Закрыть</Link>
               </button>
             </div>
             <div className="pop-browse__btn-edit _hide">

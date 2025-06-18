@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import NotFound404 from "../assets/NotFound404.gif";
 import styled from "styled-components";
 
@@ -6,7 +7,7 @@ const SErrorContainer = styled.div`
     width: 100%;
     padding: 0 16px;
     text-align: center;
-    
+
     & img {
       width: 100%;
     }
@@ -26,6 +27,11 @@ const SErrorContainer = styled.div`
     background-size: contain;
     background-repeat: no-repeat;
   }
+
+  & a {
+    color: #fff;
+    text-decoration: underline;
+  }
 `;
 
 export default function NotFound() {
@@ -34,6 +40,9 @@ export default function NotFound() {
       <SErrorContainer>
         <h1>Page Not Found...</h1>
         <img src={NotFound404} alt="404 not found gif" />
+        <Link to="/" className="_hover02">
+          Вернуться на главную{" "}
+        </Link>
       </SErrorContainer>
     </>
   );

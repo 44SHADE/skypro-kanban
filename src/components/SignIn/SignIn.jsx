@@ -1,3 +1,4 @@
+import { Link, useNavigate } from "react-router-dom";
 import {
   Wrapper,
   ContainerSignIn,
@@ -11,6 +12,11 @@ import {
 } from "./_signIn.style";
 
 export default function SignIn() {
+  const navigate = useNavigate();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
   return (
     <Wrapper>
       <ContainerSignIn>
@@ -34,12 +40,12 @@ export default function SignIn() {
                 id="formpassword"
                 placeholder="Пароль"
               />
-              <ModalBtnEnter className="_hover01">
+              <ModalBtnEnter className="_hover01" onClick={handleLogin}>
                 <a>Войти</a>
               </ModalBtnEnter>
               <ModalFormGroup>
                 <p>Нужно зарегистрироваться?</p>
-                <a>Регистрируйтесь здесь</a>
+                <Link to="/register">Регистрируйтесь здесь</Link>
               </ModalFormGroup>
             </ModalFormLogin>
           </ModalBlock>

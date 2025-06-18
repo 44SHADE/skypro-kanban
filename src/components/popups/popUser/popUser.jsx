@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import {SHeaderPopUser, PopUserSetMail, PopUserSetName, PopUserSetTheme, InputTheme} from "./_popUser.style";
 
-export default function PopUser({handlePopExitShow}) {
+export default function PopUser() {
   return (
     <>
       <SHeaderPopUser>
@@ -11,8 +12,8 @@ export default function PopUser({handlePopExitShow}) {
           <p>Темная тема</p>
           <InputTheme type="checkbox" name="checkbox"/>
         </PopUserSetTheme>
-        <button type="button" className="_hover03" onClick={handlePopExitShow}>
-          <a>Выйти</a>
+        <button type="button" className="_hover03">
+          <Link to="/exit">Выйти</Link>
         </button>
       </SHeaderPopUser>
     </>

@@ -9,7 +9,11 @@ import {
   PopExitTTL,
 } from "./_popExit.style";
 
-export default function PopExit() {
+export default function PopExit({ setIsAuth }) {
+  const handleOut = (e) => {
+    e.preventDefault();
+    setIsAuth(false);
+  }
   return (
     <SPopExit>
       <SPopExitContainer>
@@ -19,8 +23,8 @@ export default function PopExit() {
           </PopExitTTL>
           <form className="pop-exit__form" id="formExit" action="#">
             <PopExitFormGroup>
-              <PopExitBtnYes className="_hover01">
-                <Link to="/login">Да, выйти</Link>
+              <PopExitBtnYes className="_hover01" onClick={handleOut}>
+                <a>Да, выйти</a>
               </PopExitBtnYes>
               <PopExitBtnNo className="_hover03">
                 <Link to="/">Нет, остаться</Link>

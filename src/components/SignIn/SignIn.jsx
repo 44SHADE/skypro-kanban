@@ -11,10 +11,12 @@ import {
   ModalTTL,
 } from "./_signIn.style";
 
-export default function SignIn() {
+export default function SignIn({setIsAuth}) {
   const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
+    setIsAuth(true);
     navigate("/");
   };
   return (

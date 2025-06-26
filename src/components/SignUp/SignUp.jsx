@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Wrapper,
   ContainerSignUp,
@@ -10,8 +10,35 @@ import {
   ModalInput,
   ModalTTL,
 } from "./_signUp.style";
+import { useState } from "react";
+import { register } from "../../services/auth/register";
+import { validateAuthForms } from "../../utils/validateForm";
 
-export default function SignIn() {
+export default function SignUp() {
+  const [formData, setFormData] = useState({
+    name: "",
+    login: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const isValid = validateAuthForms(formData);
+    if (!isValid) {
+      alert("Заполните все поля!");
+      return null;
+    }
+
+    register(formData)
+      .then(() => navigate("/login"))
+      .catch((err) => alert(err.response.data.error));
+  };
   return (
     <Wrapper>
       <ContainerSignUp>
@@ -20,13 +47,15 @@ export default function SignIn() {
             <ModalTTL>
               <h2>Регистрация</h2>
             </ModalTTL>
-            <ModalFormLogin id="formLogIn" action="#">
+            <ModalFormLogin id="formLogIn">
               <ModalInput
                 className="first-name"
                 type="text"
-                name="first-name"
+                name="name"
                 id="first-name"
                 placeholder="Имя"
+                value={formData.name}
+                onChange={handleChange}
               />
               <ModalInput
                 className="login"
@@ -34,6 +63,8 @@ export default function SignIn() {
                 name="login"
                 id="loginReg"
                 placeholder="Эл. почта"
+                value={formData.login}
+                onChange={handleChange}
               />
               <ModalInput
                 className="password-first"
@@ -41,8 +72,10 @@ export default function SignIn() {
                 name="password"
                 id="passwordFirst"
                 placeholder="Пароль"
+                value={formData.password}
+                onChange={handleChange}
               />
-              <ModalBtnSignUpEnt className="_hover01">
+              <ModalBtnSignUpEnt className="_hover01" onClick={handleRegister}>
                 <a>Зарегистрироваться</a>
               </ModalBtnSignUpEnt>
               <ModalFormGroup>

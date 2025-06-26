@@ -1,4 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../services/auth/login";
+
 import {
   Wrapper,
   ContainerSignIn,
@@ -10,14 +12,33 @@ import {
   ModalInput,
   ModalTTL,
 } from "./_signIn.style";
+import { useState } from "react";
+import { addUserToLocalStorage } from "../../utils/localStorage";
+import { validateAuthForms } from "../../utils/validateForm";
 
-export default function SignIn({setIsAuth}) {
+export default function SignIn({ setIsAuth }) {
+  const [formData, setFormData] = useState({ login: "", password: "" });
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setIsAuth(true);
-    navigate("/");
+    const isValid = validateAuthForms(formData);
+    if (!isValid) {
+      alert("Заполните все поля!");
+      return null;
+    }
+    login(formData)
+      .then((res) => {        
+        addUserToLocalStorage(res.data.user);
+        setIsAuth(true);
+        navigate("/");
+      })
+      .catch((error) => alert(error.response.data.error));
   };
   return (
     <Wrapper>
@@ -34,6 +55,7 @@ export default function SignIn({setIsAuth}) {
                 name="login"
                 id="formlogin"
                 placeholder="Эл. почта"
+                onChange={handleChange}
               />
               <ModalInput
                 className="modal__input"
@@ -41,6 +63,7 @@ export default function SignIn({setIsAuth}) {
                 name="password"
                 id="formpassword"
                 placeholder="Пароль"
+                onChange={handleChange}
               />
               <ModalBtnEnter className="_hover01" onClick={handleLogin}>
                 <a>Войти</a>

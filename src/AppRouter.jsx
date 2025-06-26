@@ -16,7 +16,7 @@ export default function AppRoutes({ user, authHandle }) {
         path="/"
         element={
           <ProtectedRoute isAuth={user}>
-            <MainPage />{" "}
+            <MainPage />
           </ProtectedRoute>
         }
       >

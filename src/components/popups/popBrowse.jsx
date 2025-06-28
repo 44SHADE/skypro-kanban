@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Calendar from "../Calendar";
+import { deleteTask, updateTask } from "../../services/api/tasksService";
 
 export default function PopBrowse() {
   return (

@@ -1,6 +1,14 @@
-
 import { Link } from "react-router-dom";
-import { SCardsItem, SCardsCard, SCardContent, SCardGroup, CardTitle, CardDate, CardBtn, CardBtnDiv } from "./_card.style";
+import {
+  SCardsItem,
+  SCardsCard,
+  SCardContent,
+  SCardGroup,
+  CardTitle,
+  CardDate,
+  CardBtn,
+  CardBtnDiv,
+} from "./_card.style";
 import CardTheme from "./CardTheme";
 
 export default function Card({ id, theme, title, date }) {
@@ -8,7 +16,7 @@ export default function Card({ id, theme, title, date }) {
     <SCardsItem key={id}>
       <SCardsCard>
         <SCardGroup>
-          <CardTheme theme={theme}/>
+          <CardTheme theme={theme} />
           <a target="_self">
             <CardBtn>
               <CardBtnDiv />

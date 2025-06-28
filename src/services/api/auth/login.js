@@ -4,6 +4,6 @@ export const login = async (body) => {
   try {
     return await axiosInstance.post("/user/login", JSON.stringify(body));
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 };

@@ -1,7 +1,38 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Calendar from "../Calendar";
+
+import Calendar from "../../Calendar";
+import Category from "./Categories";
+
+import { createNewTask } from "../../../services/api/tasksService";
 
 export default function PopNewCard() {
+  const [isActive, setIsActive] = useState(-1);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    date: "",
+    topic: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleActiveCategoryClick = (e, index) => {
+    const { textContent } = e.target;
+    const attributeTopic = e.target.getAttribute("name");    
+    setIsActive(index);
+    setFormData({ ...formData, [attributeTopic]: textContent });
+  };
+
+  const createTask = () => {
+    createNewTask(formData)
+      .then((res) => console.log(res.status, res.statusText, res.data))
+      .catch((err) => alert(err.response.data.error));
+  };
+
   return (
     <div className="pop-new-card" id="popNewCard">
       <div className="pop-new-card__container">
@@ -24,10 +55,11 @@ export default function PopNewCard() {
                   <input
                     className="form-new__input"
                     type="text"
-                    name="name"
+                    name="title"
                     id="formTitle"
                     placeholder="Введите название задачи..."
                     autoFocus
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="form-new__block">
@@ -36,9 +68,10 @@ export default function PopNewCard() {
                   </label>
                   <textarea
                     className="form-new__area"
-                    name="text"
+                    name="description"
                     id="textArea"
                     placeholder="Введите описание задачи..."
+                    onChange={handleInputChange}
                   ></textarea>
                 </div>
               </form>
@@ -50,18 +83,27 @@ export default function PopNewCard() {
             <div className="pop-new-card__categories categories">
               <p className="categories__p subttl">Категория</p>
               <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
+                <Category
+                  category={"Web Design"}
+                  colorClass={"_orange"}
+                  isActive={isActive === 0}
+                  onActive={(e) => handleActiveCategoryClick(e, 0)}
+                />
+                <Category
+                  category={"Research"}
+                  colorClass={"_green"}
+                  isActive={isActive === 1}
+                  onActive={(e) => handleActiveCategoryClick(e, 1)}
+                />
+                <Category
+                  category={"Copywriting"}
+                  colorClass={"_purple"}
+                  isActive={isActive === 2}
+                  onActive={(e) => handleActiveCategoryClick(e, 2)}
+                />
               </div>
             </div>
-            <button className="form-new__create _hover01" id="btnCreate">
+            <button className="form-new__create _hover01" id="btnCreate" onClick={createTask}>
               Создать задачу
             </button>
           </div>

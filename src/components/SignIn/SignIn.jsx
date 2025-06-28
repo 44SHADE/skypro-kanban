@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../services/auth/login";
+import { login } from "../../services/api/auth/login";
 
 import {
   Wrapper,
@@ -33,7 +33,7 @@ export default function SignIn({ setIsAuth }) {
       return null;
     }
     login(formData)
-      .then((res) => {        
+      .then((res) => {
         addUserToLocalStorage(res.data.user);
         setIsAuth(true);
         navigate("/");

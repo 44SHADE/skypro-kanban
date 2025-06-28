@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import SContainer from "./style/containerStyle";
 import styled from "styled-components";
 
@@ -28,13 +27,7 @@ const SMainContent = styled.div`
   display: flex;
 `;
 
-export default function Main({ children }) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 3000);
-  }, []);
-
+export default function Main({ children, loading }) {
   return (
     <SMain>
       <SContainer>

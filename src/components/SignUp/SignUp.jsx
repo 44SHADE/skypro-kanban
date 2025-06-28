@@ -11,7 +11,7 @@ import {
   ModalTTL,
 } from "./_signUp.style";
 import { useState } from "react";
-import { register } from "../../services/auth/register";
+import { register } from "../../services/api/auth/register";
 import { validateAuthForms } from "../../utils/validateForm";
 
 export default function SignUp() {

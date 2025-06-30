@@ -41,11 +41,11 @@ const MainPage = () => {
       <Header onShow={() => setShowPop(!showPop)} />
 
       <Main loading={loading} setLoading={setLoading}>
-        {cards.map((card) => (
+        {cards.length !== 0 ? cards.map((card) => (
           <Column key={card.status} status={card.status} cards={card.data} />
-        ))}
+        )) : <p style={{color: "red"}}>Кажется, Вы пока не создали ни одной задачи! Нажмите "Создать новую задачу" и она появится здесь!</p>}
       </Main>
-      <Outlet />
+      <Outlet context={[setCards, statuses]}/>
     </Wrapper>
   );
 };

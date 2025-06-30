@@ -11,12 +11,12 @@ import {
 } from "./_card.style";
 import CardTheme from "./CardTheme";
 
-export default function Card({ id, theme, title, date }) {
+export default function Card({ id, topic, title, date }) {
   return (
     <SCardsItem key={id}>
       <SCardsCard>
         <SCardGroup>
-          <CardTheme theme={theme} />
+          <CardTheme topic={topic} />
           <a target="_self">
             <CardBtn>
               <CardBtnDiv />

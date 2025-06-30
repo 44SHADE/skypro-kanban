@@ -38,7 +38,7 @@ export default function SignIn({ setIsAuth }) {
         setIsAuth(true);
         navigate("/");
       })
-      .catch((error) => alert(error.response.data.error));
+      .catch((error) => alert(error));
   };
   return (
     <Wrapper>

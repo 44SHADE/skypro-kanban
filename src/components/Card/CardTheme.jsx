@@ -15,14 +15,14 @@ const cardCategory = {
   },
 };
 
-const cardColor =  ($theme) => {
-    const color = cardCategory[$theme]; 
+const cardColor =  ($topic) => {
+    const color = cardCategory[$topic]; 
     if(color) return `background-color: ${color.background}; color: ${color.text};`
     return `background-color: #94A6BE; color: #FFFFFF;`
 }
 
 const SCardTheme = styled.div`
-  ${({$theme}) => cardColor($theme)}
+  ${({$topic}) => cardColor($topic)}
   width: auto;
   height: 20px;
   padding: 5px 14px;
@@ -35,10 +35,10 @@ const SCardTheme = styled.div`
   }
 `;
 
-export default function CardTheme({ theme }) {    
+export default function CardTheme({ topic }) {    
   return (
-    <SCardTheme $theme={theme}>
-      <p>{theme}</p>
+    <SCardTheme $topic={topic}>
+      <p>{topic}</p>
     </SCardTheme>
   );
 }

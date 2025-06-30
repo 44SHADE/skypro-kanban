@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext, useNavigate } from "react-router-dom";
 
 import Calendar from "../../Calendar";
 import Category from "./Categories";
 
 import { createNewTask } from "../../../services/api/tasksService";
+import filterCardsByStatus from "../../../utils/cardFilter";
 
 export default function PopNewCard() {
+  const navigate = useNavigate();
+  const [setCards, statuses] = useOutletContext();
   const [isActive, setIsActive] = useState(-1);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    date: "",
     topic: "",
   });
 
@@ -29,8 +31,12 @@ export default function PopNewCard() {
 
   const createTask = () => {
     createNewTask(formData)
-      .then((res) => console.log(res.status, res.statusText, res.data))
-      .catch((err) => alert(err.response.data.error));
+      .then((req) => {
+        const cards = filterCardsByStatus(statuses, req.data.tasks);
+        setCards(cards);
+        navigate("/");
+      })
+      .catch((err) => alert(err));
   };
 
   return (

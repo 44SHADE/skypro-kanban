@@ -30,7 +30,7 @@ const MainPage = () => {
         const filtredCards = filterCardsByStatus(statuses, req.data.tasks);
         setCards(filtredCards);
       })
-      .catch((error) => alert(error.response.data.error))
+      .catch((error) => alert(error))
       .finally(() => setLoading(false));
   }, []);
 

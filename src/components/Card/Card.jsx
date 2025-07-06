@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
+
 import {
   SCardsItem,
   SCardsCard,
@@ -58,7 +60,7 @@ export default function Card({ id, topic, title, date }) {
                 </clipPath>
               </defs>
             </svg>
-            <p>{date}</p>
+            <p>{format(date, "dd.mm.yy")}</p>
           </CardDate>
         </SCardContent>
       </SCardsCard>

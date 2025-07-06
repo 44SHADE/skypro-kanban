@@ -4,10 +4,12 @@ import SContainer from "../style/containerStyle";
 import {SHeader, SHeaderBlock, SHeaderBtnMainNew, SHeaderNav, SHeaderUser} from "./_header.style.js";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { getUserFromLocalStorage } from "../../utils/localStorage.js";
 
 export default function Header() {
   const [popVisible, setPopVisible] = useState(false);
 
+  const user = getUserFromLocalStorage();
   function handlePopVisible() {
     setPopVisible((preState) => !preState);
   }
@@ -23,7 +25,7 @@ export default function Header() {
               <Link to="/create-card">Создать новую задачу</Link>
             </SHeaderBtnMainNew>
             <SHeaderUser onClick={handlePopVisible}>
-              Ivan Ivanov
+              {user.login}
             </SHeaderUser>
             {popVisible && <PopUser/>}
           </SHeaderNav>

@@ -1,15 +1,19 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+
+import { AuthContext } from "../../../context/AuthContext";
+
 import {SHeaderPopUser, PopUserSetMail, PopUserSetName, PopUserSetTheme, InputTheme} from "./_popUser.style";
-import { getUserFromLocalStorage } from "../../../utils/localStorage";
+
 
 export default function PopUser() {
-  const user = getUserFromLocalStorage();
+  const {user} = useContext(AuthContext);
   return (
     <>
       <SHeaderPopUser>
         <a href="">x</a>
-        <PopUserSetName>{user.name}</PopUserSetName>
-        <PopUserSetMail>{user.mail || "тут mail"}</PopUserSetMail>
+        <PopUserSetName>{user ? user.name : ""}</PopUserSetName>
+        <PopUserSetMail>{user ? `${user.login}@gmail.com` : ""}</PopUserSetMail>
         <PopUserSetTheme className="pop-user-set__theme">
           <p>Темная тема</p>
           <InputTheme type="checkbox" name="checkbox"/>

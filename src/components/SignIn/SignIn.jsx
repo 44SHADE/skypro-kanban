@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { login } from "../../services/api/auth/login";
 import { validateAuthForms } from "../../utils/validateForm";
-import { AuthContext } from "../../context/AuthContext";
+import useAuth from "../../context/AuthContext/useAuth";
 
 import {
   Wrapper,
@@ -19,7 +19,7 @@ import {
 
 export default function SignIn() {
   const [formData, setFormData] = useState({ login: "", password: "" });
-  const { loginState } = useContext(AuthContext);
+  const { loginState } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {

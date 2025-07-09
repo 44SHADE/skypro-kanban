@@ -1,7 +1,7 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { AuthContext } from "../../context/AuthContext.js";
+import useAuth from "../../context/AuthContext/useAuth.js";
 
 import HeaderLogo from "./HeaderLogo.jsx";
 import PopUser from "../popups/popUser/popUser.jsx";
@@ -15,8 +15,9 @@ import {
   SHeaderUser,
 } from "./_header.style.js";
 
+
 export default function Header() {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const [popVisible, setPopVisible] = useState(false);
 
   function handlePopVisible() {

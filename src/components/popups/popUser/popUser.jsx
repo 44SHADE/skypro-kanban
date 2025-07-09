@@ -1,13 +1,17 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { AuthContext } from "../../../context/AuthContext";
+import useAuth from "../../../context/AuthContext/useAuth";
 
-import {SHeaderPopUser, PopUserSetMail, PopUserSetName, PopUserSetTheme, InputTheme} from "./_popUser.style";
-
+import {
+  SHeaderPopUser,
+  PopUserSetMail,
+  PopUserSetName,
+  PopUserSetTheme,
+  InputTheme,
+} from "./_popUser.style";
 
 export default function PopUser() {
-  const {user} = useContext(AuthContext);
+  const { user } = useAuth();
   return (
     <>
       <SHeaderPopUser>
@@ -16,7 +20,7 @@ export default function PopUser() {
         <PopUserSetMail>{user ? `${user.login}@gmail.com` : ""}</PopUserSetMail>
         <PopUserSetTheme className="pop-user-set__theme">
           <p>Темная тема</p>
-          <InputTheme type="checkbox" name="checkbox"/>
+          <InputTheme type="checkbox" name="checkbox" />
         </PopUserSetTheme>
         <button type="button" className="_hover03">
           <Link to="/exit">Выйти</Link>

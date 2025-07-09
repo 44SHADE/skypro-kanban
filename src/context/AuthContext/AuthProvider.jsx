@@ -4,7 +4,7 @@ import {
   addUserToLocalStorage,
   deleteUserFromLocalStorage,
   getUserFromLocalStorage,
-} from "../utils/localStorage";
+} from "../../utils/localStorage";
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(getUserFromLocalStorage());

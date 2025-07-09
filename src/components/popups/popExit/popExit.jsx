@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
 
-import { AuthContext } from "../../../context/AuthContext";
+import useAuth from "../../../context/AuthContext/useAuth";
 
 import {
   SPopExit,
@@ -14,7 +13,7 @@ import {
 } from "./_popExit.style";
 
 export default function PopExit() {
-  const {logout} = useContext(AuthContext);
+  const {logout} = useAuth()
   const navigate = useNavigate();
 
   const handleOut = (e) => {

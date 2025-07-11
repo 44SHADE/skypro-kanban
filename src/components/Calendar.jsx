@@ -1,4 +1,6 @@
-export default function Calendar() {
+import { format } from "date-fns";
+
+export default function Calendar({ date }) {
   return (
     <div className="calendar__block">
       <div className="calendar__nav">
@@ -78,7 +80,8 @@ export default function Calendar() {
       <input type="hidden" id="datepick_value" value="08.09.2023" />
       <div className="calendar__period">
         <p className="calendar__p date-end">
-          Срок исполнения: <span className="date-control">09.09.23</span>
+          Срок исполнения:{" "}
+          <span className="date-control">{date ? format(date, "dd.mm.yy") : "01.01.1994"}</span>
         </p>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../services/api/auth/login";
 import { validateAuthForms } from "../../utils/validateForm";
 import useAuth from "../../context/AuthContext/useAuth";
+import { notify, SToastContainer } from "../../shared/notifications";
 
 import {
   Wrapper,
@@ -31,7 +32,7 @@ export default function SignIn() {
     e.preventDefault();
     const isValid = validateAuthForms(formData);
     if (!isValid) {
-      alert("Заполните все поля!");
+      notify("Ой!", "Заполните все поля!", "warning")
       return null;
     }
     login(formData)
@@ -40,7 +41,7 @@ export default function SignIn() {
         loginState(user);
         navigate("/");
       })
-      .catch((error) => alert(error));
+      .catch((error) => error);
   };
   return (
     <Wrapper>
@@ -77,6 +78,7 @@ export default function SignIn() {
             </ModalFormLogin>
           </ModalBlock>
         </Modal>
+        <SToastContainer />
       </ContainerSignIn>
     </Wrapper>
   );

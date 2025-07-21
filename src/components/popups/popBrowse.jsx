@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import useTasks from "../../context/TaskContext/useTasks";
 
 import Calendar from "../Calendar";
-import { useEffect, useState } from "react";
 
 export default function PopBrowse() {
   const [cardData, setCardData] = useState(null);
@@ -13,8 +13,6 @@ export default function PopBrowse() {
 
   useEffect(() => {
     const card = notFiltredCards.find((card) => card._id === params.id);
-    console.log(notFiltredCards, card, params.id);
-
     setCardData(card);
   }, [params.id]);
 
@@ -83,7 +81,7 @@ export default function PopBrowse() {
             <div className="pop-browse__btn-browse ">
               <div className="btn-group">
                 <button className="btn-browse__edit _btn-bor _hover03">
-                  <a href="#">Редактировать задачу</a>
+                  <a>Редактировать задачу</a>
                 </button>
                 <button
                   className="btn-browse__delete _btn-bor _hover03"
@@ -92,7 +90,7 @@ export default function PopBrowse() {
                     navigate("/");
                   }}
                 >
-                  <a href="#">Удалить задачу</a>
+                  <a>Удалить задачу</a>
                 </button>
               </div>
               <button className="btn-browse__close _btn-bg _hover01">

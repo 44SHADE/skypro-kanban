@@ -7,6 +7,7 @@ import {
   updateTask,
 } from "../../services/api/tasksService";
 import useAuth from "../AuthContext/useAuth";
+import { notify } from "../../shared/notifications";
 
 export default function TasksProvider({ children }) {
   const { user } = useAuth();
@@ -31,7 +32,7 @@ export default function TasksProvider({ children }) {
         const filtredCards = filterCardsByStatus(statuses, res.data.tasks);
         setCards(filtredCards);
       })
-      .catch((error) => alert(error))
+      .catch((error) => error)
       .finally(() => setLoading(false));
   }, [user]);
 
@@ -41,8 +42,9 @@ export default function TasksProvider({ children }) {
         setNotFiltredCards(res.data.tasks);
         const filtredCards = filterCardsByStatus(statuses, res.data.tasks);
         setCards(filtredCards);
+        notify("Успех!", `Карточка id: ${id} удалена!`, "success");
       })
-      .catch((error) => alert(error));
+      .catch((error) => error);
     return true;
   };
 
@@ -53,8 +55,9 @@ export default function TasksProvider({ children }) {
         setNotFiltredCards(res.data.tasks);
         const filtredCards = filterCardsByStatus(statuses, res.data.tasks);
         setCards(filtredCards);
+        notify("Успех!", `Карточка ${data.title} обновлена`, "success");
       })
-      .catch((error) => alert(error))
+      .catch((error) => error)
       .finally(() => setLoading(false));
   };
 

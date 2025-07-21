@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import AppRoutes from "./AppRouter";
 import AuthProvider from "./context/AuthContext/AuthProvider";
 

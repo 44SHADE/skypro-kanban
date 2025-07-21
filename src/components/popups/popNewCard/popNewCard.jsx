@@ -7,10 +7,11 @@ import Category from "./Categories";
 import { createNewTask } from "../../../services/api/tasksService";
 import filterCardsByStatus from "../../../utils/cardFilter";
 import useTasks from "../../../context/TaskContext/useTasks";
+import { notify } from "../../../shared/notifications";
 
 export default function PopNewCard() {
   const navigate = useNavigate();
-  const { setCards, statuses } = useTasks();
+  const { setCards, statuses, setNotFiltredCards } = useTasks();
   const [isActive, setIsActive] = useState(-1);
   const [formData, setFormData] = useState({
     title: "",
@@ -35,9 +36,11 @@ export default function PopNewCard() {
       .then((req) => {
         const cards = filterCardsByStatus(statuses, req.data.tasks);
         setCards(cards);
+        setNotFiltredCards(req.data.tasks);
+        notify("Успех!", "Задача добавлена", "success")
         navigate("/");
       })
-      .catch((err) => alert(err));
+      .catch((err) => err);
   };
 
   return (

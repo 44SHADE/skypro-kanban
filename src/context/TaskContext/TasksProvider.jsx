@@ -61,6 +61,23 @@ export default function TasksProvider({ children }) {
       .finally(() => setLoading(false));
   };
 
+  function filterCards(CardComponent, status, cards) {
+    if (!Array.isArray(cards) || cards.length === 0) return [];
+    return cards.map((card) => {
+      if (card.status === status) {
+        return (
+          <CardComponent
+            key={card._id}
+            id={card._id}
+            topic={card.topic}
+            title={card.title}
+            date={card.date}
+          />
+        );
+      }
+    })
+  }
+
   return (
     <TasksContext.Provider
       value={{
@@ -72,6 +89,7 @@ export default function TasksProvider({ children }) {
         setNotFiltredCards,
         deleteCard,
         updateCard,
+        filterCards
       }}
     >
       {children}

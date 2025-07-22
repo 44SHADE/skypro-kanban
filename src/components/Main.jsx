@@ -32,29 +32,16 @@ const SMainContent = styled.div`
 `;
 
 export default function Main() {
-  const { cards, loading } = useTasks();
+  const { statuses } = useTasks();
 
-  return loading ? (
-    <p style={{ textAlign: "center", paddingTop: "10px" }}>Данные загружаются...</p>
-  ) : (
+  return (
     <SMain>
       <SContainer>
         <SMainBlock>
           <SMainContent>
-            {cards.length !== 0 ? (
-              cards.map((card) => (
-                <Column
-                  key={card.status}
-                  status={card.status}
-                  cards={card.data}
-                />
-              ))
-            ) : (
-              <p style={{ color: "rgb( 145, 102, 187)", textAlign: "center" }}>
-                Кажется, Вы пока не создали ни одной задачи! Нажмите "Создать
-                новую задачу" и она появится здесь!
-              </p>
-            )}
+            {statuses.map((status) => (
+              <Column key={status} status={status} />
+            ))}
           </SMainContent>
         </SMainBlock>
       </SContainer>

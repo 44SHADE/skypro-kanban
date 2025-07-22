@@ -1,5 +1,8 @@
+import useTasks from "../context/TaskContext/useTasks";
+import { loaderMock } from "../shared/mock";
 import Card from "./Card/Card";
 import styled from "styled-components";
+import Loader from "./Loader";
 
 const SMainColumn = styled.div`
   @media screen and (max-width: 1200px) {
@@ -39,22 +42,19 @@ const SCards = styled.div`
 }
 `;
 
-export default function Column({ status, cards }) {
+export default function Column({ status }) {
+  const { filterCards, notFiltredCards, loading } = useTasks();
+  
+  //TODO: DELETE FILTRED CARDS ARRAY
   return (
     <SMainColumn>
       <SColumnTitle>
         <p>{status}</p>
       </SColumnTitle>
       <SCards>
-        {cards.map((card) => (
-          <Card
-            key={card._id}
-            id={card._id}
-            topic={card.topic}
-            title={card.title}
-            date={card.date}
-          />
-        ))}
+        {loading
+          ? loaderMock(Loader, 4)
+          : filterCards(Card, status, notFiltredCards)}
       </SCards>
     </SMainColumn>
   );

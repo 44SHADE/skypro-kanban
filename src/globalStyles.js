@@ -36,6 +36,17 @@ body {
   color: #000000;
 }
 
+@keyframes card-animation {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+  }
+}
+
 ._hover01:hover {
   background-color: #33399b;
 }

@@ -7,6 +7,15 @@ const SHeader = styled.header`
 `;
 
 const SHeaderBlock = styled.div`
+  @media screen and (max-width: 430px) {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+
   height: 70px;
   display: flex;
   flex-wrap: nowrap;

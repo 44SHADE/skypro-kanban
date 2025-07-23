@@ -43,9 +43,8 @@ const SCards = styled.div`
 `;
 
 export default function Column({ status }) {
-  const { filterCards, notFiltredCards, loading } = useTasks();
+  const { filterCards, cards, loading } = useTasks();
   
-  //TODO: DELETE FILTRED CARDS ARRAY
   return (
     <SMainColumn>
       <SColumnTitle>
@@ -54,7 +53,7 @@ export default function Column({ status }) {
       <SCards>
         {loading
           ? loaderMock(Loader, 4)
-          : filterCards(Card, status, notFiltredCards)}
+          : filterCards(Card, status, cards)}
       </SCards>
     </SMainColumn>
   );

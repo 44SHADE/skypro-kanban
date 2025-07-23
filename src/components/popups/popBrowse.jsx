@@ -5,14 +5,15 @@ import useTasks from "../../context/TaskContext/useTasks";
 
 import Calendar from "../Calendar";
 
+//TODO: colorized topic s-28
 export default function PopBrowse() {
   const [cardData, setCardData] = useState(null);
-  const { deleteCard, notFiltredCards } = useTasks();
+  const { deleteCard, cards } = useTasks();
   const navigate = useNavigate();
   const params = useParams();
 
   useEffect(() => {
-    const card = notFiltredCards.find((card) => card._id === params.id);
+    const card = cards.find((card) => card._id === params.id);
     setCardData(card);
   }, [params.id]);
 

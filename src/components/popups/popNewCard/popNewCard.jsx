@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { createNewTask } from "../../../services/api/tasksService";
+import { notify } from "../../../shared/notifications";
+import useTasks from "../../../context/TaskContext/useTasks";
+
 import Calendar from "../../Calendar";
 import Category from "./Categories";
 
-import { createNewTask } from "../../../services/api/tasksService";
-import filterCardsByStatus from "../../../utils/cardFilter";
-import useTasks from "../../../context/TaskContext/useTasks";
-import { notify } from "../../../shared/notifications";
-
 export default function PopNewCard() {
   const navigate = useNavigate();
-  const { setCards, statuses, setNotFiltredCards } = useTasks();
+  const { setCards } = useTasks();
   const [isActive, setIsActive] = useState(-1);
   const [formData, setFormData] = useState({
     title: "",
@@ -34,9 +33,7 @@ export default function PopNewCard() {
   const createTask = () => {
     createNewTask(formData)
       .then((req) => {
-        const cards = filterCardsByStatus(statuses, req.data.tasks);
-        setCards(cards);
-        setNotFiltredCards(req.data.tasks);
+        setCards(req.data.tasks);
         notify("Успех!", "Задача добавлена", "success")
         navigate("/");
       })

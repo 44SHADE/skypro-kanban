@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TasksContext } from "./TasksContext";
-import filterCardsByStatus from "../../utils/cardFilter";
+
 import {
   getTasks,
   deleteTask,
@@ -12,7 +12,6 @@ import { notify } from "../../shared/notifications";
 export default function TasksProvider({ children }) {
   const { user } = useAuth();
   const [cards, setCards] = useState([]);
-  const [notFiltredCards, setNotFiltredCards] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const statuses = [
@@ -27,10 +26,7 @@ export default function TasksProvider({ children }) {
     if (!user) return undefined;
     getTasks()
       .then((res) => {
-        setNotFiltredCards(res.data.tasks);
-        // returned [ { status, data: [filtred cards] }, ...n ]
-        const filtredCards = filterCardsByStatus(statuses, res.data.tasks);
-        setCards(filtredCards);
+        setCards(res.data.tasks);
       })
       .catch((error) => error)
       .finally(() => setLoading(false));
@@ -39,9 +35,7 @@ export default function TasksProvider({ children }) {
   const deleteCard = (id) => {
     deleteTask(id)
       .then((res) => {
-        setNotFiltredCards(res.data.tasks);
-        const filtredCards = filterCardsByStatus(statuses, res.data.tasks);
-        setCards(filtredCards);
+        setCards(res.data.tasks);
         notify("Успех!", `Карточка id: ${id} удалена!`, "success");
       })
       .catch((error) => error);
@@ -52,9 +46,7 @@ export default function TasksProvider({ children }) {
     setLoading(true);
     updateTask(id, data)
       .then((res) => {
-        setNotFiltredCards(res.data.tasks);
-        const filtredCards = filterCardsByStatus(statuses, res.data.tasks);
-        setCards(filtredCards);
+        setCards(res.data.tasks);
         notify("Успех!", `Карточка ${data.title} обновлена`, "success");
       })
       .catch((error) => error)
@@ -75,21 +67,19 @@ export default function TasksProvider({ children }) {
           />
         );
       }
-    })
+    });
   }
 
   return (
     <TasksContext.Provider
       value={{
         cards,
-        notFiltredCards,
         loading,
         statuses,
         setCards,
-        setNotFiltredCards,
         deleteCard,
         updateCard,
-        filterCards
+        filterCards,
       }}
     >
       {children}

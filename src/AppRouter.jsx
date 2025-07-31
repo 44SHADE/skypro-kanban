@@ -5,7 +5,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import LogOutPage from "./pages/logOutPage";
 import NotFoundErrorPage from "./pages/NotFoundErrorPage";
-import PopBrowse from "./components/popups/popBrowse";
+import PopBrowse from "./components/popups/popBrowse/popBrowse";
 import AddNewCardPage from "./pages/AddNewCardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 

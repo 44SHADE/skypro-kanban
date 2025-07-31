@@ -60,7 +60,7 @@ export default function Card({ id, topic, title, date }) {
                   </clipPath>
                 </defs>
               </svg>
-              <p>{format(date, "dd.mm.yy")}</p>
+              <p>{date ? format(date, "dd.MM.yy") : "01.01.1994"}</p>
             </CardDate>
           </SCardContent>
         </SCardsCard>

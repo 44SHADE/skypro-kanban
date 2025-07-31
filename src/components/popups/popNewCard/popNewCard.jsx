@@ -16,6 +16,7 @@ export default function PopNewCard() {
     title: "",
     description: "",
     topic: "",
+    date: "",
   });
 
   const handleInputChange = (e) => {
@@ -84,7 +85,7 @@ export default function PopNewCard() {
               </form>
               <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
-                <Calendar />
+                <Calendar cardData={formData} setCardData={setFormData} isEditing={true}/>
               </div>
             </div>
             <div className="pop-new-card__categories categories">

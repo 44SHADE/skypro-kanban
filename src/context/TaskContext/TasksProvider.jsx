@@ -8,6 +8,7 @@ import {
 } from "../../services/api/tasksService";
 import useAuth from "../AuthContext/useAuth";
 import { notify } from "../../shared/notifications";
+import { Draggable } from "@hello-pangea/dnd";
 
 export default function TasksProvider({ children }) {
   const { user } = useAuth();
@@ -43,28 +44,41 @@ export default function TasksProvider({ children }) {
   };
 
   const updateCard = (id, data) => {
-    setLoading(true);
     updateTask(id, data)
       .then((res) => {
         setCards(res.data.tasks);
         notify("Успех!", `Карточка ${data.title} обновлена`, "success");
       })
-      .catch((error) => error)
-      .finally(() => setLoading(false));
+      .catch((error) => error);
+  };
+
+  const draggableUpdate = (id, data) => {
+    updateTask(id, data).catch((error) => error);
   };
 
   function filterCards(CardComponent, status, cards) {
     if (!Array.isArray(cards) || cards.length === 0) return [];
-    return cards.map((card) => {
+    return cards.map((card, index) => {
       if (card.status === status) {
         return (
-          <CardComponent
-            key={card._id}
-            id={card._id}
-            topic={card.topic}
-            title={card.title}
-            date={card.date}
-          />
+          <Draggable
+            key={`draggable-el-${index}`}
+            draggableId={card._id}
+            index={index}
+          >
+            {(provided) => (
+              <CardComponent
+                key={card._id}
+                id={card._id}
+                topic={card.topic}
+                title={card.title}
+                date={card.date}
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+              />
+            )}
+          </Draggable>
         );
       }
     });
@@ -79,6 +93,7 @@ export default function TasksProvider({ children }) {
         setCards,
         deleteCard,
         updateCard,
+        draggableUpdate,
         filterCards,
       }}
     >

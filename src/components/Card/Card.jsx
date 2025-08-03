@@ -13,9 +13,9 @@ import {
 } from "./_card.style";
 import CardTheme from "./CardTheme";
 
-export default function Card({ id, topic, title, date }) {
+export default function Card({ id, topic, title, date, ...draggableProps }) {
   return (
-      <SCardsItem key={id}>
+      <SCardsItem key={id} {...draggableProps}>
         <SCardsCard>
           <SCardGroup>
             <CardTheme topic={topic} />

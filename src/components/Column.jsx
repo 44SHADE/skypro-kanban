@@ -1,8 +1,5 @@
-import useTasks from "../context/TaskContext/useTasks";
-import { loaderMock } from "../shared/mock";
-import Card from "./Card/Card";
+import { Droppable } from "@hello-pangea/dnd";
 import styled from "styled-components";
-import Loader from "./Loader";
 
 const SMainColumn = styled.div`
   @media screen and (max-width: 1200px) {
@@ -42,19 +39,20 @@ const SCards = styled.div`
 }
 `;
 
-export default function Column({ status }) {
-  const { filterCards, cards, loading } = useTasks();
-  
+export default function Column({ children, status }) {
   return (
     <SMainColumn>
       <SColumnTitle>
         <p>{status}</p>
       </SColumnTitle>
-      <SCards>
-        {loading
-          ? loaderMock(Loader, 4)
-          : filterCards(Card, status, cards)}
-      </SCards>
+      <Droppable droppableId={status} type="COLUMN">
+        {(provided) => (
+          <SCards {...provided.droppableProps} ref={provided.innerRef}>
+            {children}
+            {provided.placeholder}
+          </SCards>
+        )}
+      </Droppable>
     </SMainColumn>
   );
 }

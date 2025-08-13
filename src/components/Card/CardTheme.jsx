@@ -1,28 +1,12 @@
 import styled from "styled-components";
 
 const cardCategory = {
-  "Web Design": {
-    background: "#FFE4C2",
-    text: "#FF6D00",
-  },
-  "Research": {
-    background: "#B4FDD1",
-    text: "#06B16E",
-  },
-  "Copywriting": {
-    background: "#E9D4FF",
-    text: "#9A48F1",
-  },
+  "Web Design": "_orange",
+  "Research": "_green",
+  "Copywriting": "_purple",
 };
 
-const cardColor =  ($topic) => {
-    const color = cardCategory[$topic]; 
-    if(color) return `background-color: ${color.background}; color: ${color.text};`
-    return `background-color: #94A6BE; color: #FFFFFF;`
-}
-
 const SCardTheme = styled.div`
-  ${({$topic}) => cardColor($topic)}
   width: auto;
   height: 20px;
   padding: 5px 14px;
@@ -37,7 +21,7 @@ const SCardTheme = styled.div`
 
 export default function CardTheme({ topic }) {    
   return (
-    <SCardTheme $topic={topic}>
+    <SCardTheme className={cardCategory[topic]}>
       <p>{topic}</p>
     </SCardTheme>
   );

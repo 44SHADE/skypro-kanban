@@ -11,7 +11,7 @@ const SCardsCard = styled.div`
   @media screen and (max-width: 1200px) {
     width: 220px;
     height: 130px;
-    background-color: #ffffff;
+    background-color: ${(props) => props.theme.colors.bgSecond};
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -22,13 +22,15 @@ const SCardsCard = styled.div`
 
   width: 220px;
   height: 130px;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.bgSecond};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: stretch;
   padding: 15px 13px 19px;
+  box-shadow: ${(props) =>
+    props.$isDragging ? "0 10px 39px rgba(148, 166, 190, 0.4)" : "none"};
 `;
 
 const SCardGroup = styled.div`
@@ -52,7 +54,7 @@ const CardTitle = styled.h3`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  color: #000000;
+  color: ${(props) => props.theme.fontColor};
   margin-bottom: 10px;
 `;
 
@@ -94,5 +96,5 @@ export {
   CardTitle,
   CardDate,
   CardBtn,
-  CardBtnDiv
+  CardBtnDiv,
 };

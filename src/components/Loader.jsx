@@ -1,64 +1,71 @@
-import styled from "styled-components";
-
-const LoaderContainer = styled.div`
-  width: 220px;
-  height: 130px;
-  border-radius: 10px;
-  background-color: #ffffff;
-  margin-bottom: 10px;
-  margin-left: 10px;
-`;
-
-const LoaderBlock = styled.div`
-  padding: 15px 13px 19px;
-`;
+import { useTheme } from "styled-components";
 
 export default function Loader() {
+  const theme = useTheme();
+
   return (
-    <LoaderContainer>
-      <LoaderBlock>
+    <>
+      {theme.isDark ? (
         <svg
-          width="190"
-          height="96"
-          viewBox="0 0 190 96"
+          width="220"
+          height="130"
+          viewBox="0 0 220 130"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
+          <rect width="220" height="130" rx="10" fill="#20202C" />
           <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20H72C77.5229 20 82 15.5228 82 10C82 4.47715 77.5229 0 72 0H10ZM113 35H0V48H113V35ZM172 8H190V12H172V8ZM58 83H0V96H58V83Z"
-            fill="url(#paint0_linear_36_295)"
+            d="M23 15C17.4772 15 13 19.4772 13 25C13 30.5228 17.4772 35 23 35H85C90.5229 35 95 30.5228 95 25C95 19.4772 90.5229 15 85 15H23ZM126 50H13V63H126V50ZM185 23H203V27H185V23ZM71 98H13V111H71V98Z"
+            fill="url(#paint0_linear_36_710)"
           />
           <defs>
             <linearGradient
-              id="paint0_linear_36_295"
-              x1="4.69569e-07"
-              y1="54"
-              x2="190"
-              y2="54"
+              id="paint0_linear_36_710"
+              x1="13"
+              y1="69"
+              x2="203"
+              y2="69"
+              gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0%" stopColor="#E9EEF7">
-                <animate
-                  attributeName="stop-color"
-                  values="#E9EEF7; #C1CDDC; #E9EEF7"
-                  dur="1s"
-                  repeatCount="indefinite"
-                ></animate>
-              </stop>
-
-              <stop offset="100%" stopColor="#C1CDDC">
-                <animate
-                  attributeName="stop-color"
-                  values="#C1CDDC; #E9EEF7; #C1CDDC"
-                  dur="1s"
-                  repeatCount="indefinite"
-                ></animate>
-              </stop>
+              <stop stopColor="#475B77" />
+              <stop offset="0.458333" stopColor="#94A6BE" />
+              <stop offset="0.973958" stopColor="#475B77" />
             </linearGradient>
           </defs>
         </svg>
-      </LoaderBlock>
-    </LoaderContainer>
+      ) : (
+        <svg
+          width="220"
+          height="130"
+          viewBox="0 0 220 130"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="220" height="130" rx="10" fill="white" />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M23 15C17.4772 15 13 19.4772 13 25C13 30.5228 17.4772 35 23 35H85C90.5229 35 95 30.5228 95 25C95 19.4772 90.5229 15 85 15H23ZM126 50H13V63H126V50ZM185 23H203V27H185V23ZM71 98H13V111H71V98Z"
+            fill="url(#paint0_linear_36_265)"
+          />
+          <defs>
+            <linearGradient
+              id="paint0_linear_36_265"
+              x1="13"
+              y1="69"
+              x2="203"
+              y2="69"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#C1CDDC" />
+              <stop offset="0.458333" stopColor="#E9EEF7" />
+              <stop offset="0.973958" stopColor="#C1CDDC" />
+            </linearGradient>
+          </defs>
+        </svg>
+      )}
+    </>
   );
 }

@@ -28,7 +28,7 @@ export default function PopExit() {
           <PopExitTTL>
             <h2>Выйти из аккаунта?</h2>
           </PopExitTTL>
-          <form className="pop-exit__form" id="formExit" action="#">
+          <form className="pop-exit__form" id="formExit">
             <PopExitFormGroup>
               <PopExitBtnYes className="_hover01" onClick={handleOut}>
                 <a>Да, выйти</a>

@@ -62,17 +62,18 @@ export default function TasksProvider({ children }) {
       if (card.status === status) {
         return (
           <Draggable
-            key={`draggable-el-${index}`}
+            key={`draggable-el-${card._id}`}
             draggableId={card._id}
             index={index}
           >
-            {(provided) => (
+            {(provided, snapshot) => (
               <CardComponent
                 key={card._id}
                 id={card._id}
                 topic={card.topic}
                 title={card.title}
                 date={card.date}
+                snapshot={snapshot}
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}

@@ -26,12 +26,12 @@ const SPopExitContainer = styled.div`
 const SPopExitBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.bgSecond};
   max-width: 370px;
   width: 100%;
   padding: 50px 60px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+  border: 0.7px solid ${(props) => props.theme.colors.border};
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
 `;
 
@@ -58,7 +58,7 @@ const PopExitBtnNo = styled.button`
   height: 30px;
   background-color: transparent;
   border-radius: 4px;
-  border: 0.7px solid var(--palette-navy-60, #565eef);
+  border: 0.7px solid ${(props) => (props.theme.name === "light" ? "#565EEF" : "#FFFFFF")};
   outline: none;
   display: flex;
   align-items: center;
@@ -67,7 +67,10 @@ const PopExitBtnNo = styled.button`
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
-  color: #ffffff;
+
+  & a {
+    color: ${(props) => (props.theme.name === "light" ? "#565EEF" : "#FFFFFF")};
+  }
 `;
 
 const PopExitBtnYes = styled(PopExitBtnNo)`

@@ -13,7 +13,7 @@ import SContainer from "./style/containerStyle";
 
 const SMain = styled.main`
   width: 100%;
-  background-color: #eaeef6;
+  background-color: ${(props) => props.theme.colors.bg};
 `;
 
 const SMainBlock = styled.div`
@@ -105,7 +105,7 @@ export default function Main() {
                       <path
                         d="M1 17C1 11.3995 1 8.59921 2.08993 6.46009C3.04867 4.57847 4.57847 3.04867 6.46009 2.08993C8.59921 1 11.3995 1 17 1H205C210.601 1 213.401 1 215.54 2.08993C217.422 3.04867 218.951 4.57847 219.91 6.46009C221 8.59921 221 11.3995 221 17V115C221 120.601 221 123.401 219.91 125.54C218.951 127.422 217.422 128.951 215.54 129.91C213.401 131 210.601 131 205 131H17C11.3995 131 8.59921 131 6.46009 129.91C4.57847 128.951 3.04867 127.422 2.08993 125.54C1 123.401 1 120.601 1 115V17Z"
                         stroke="#94A6BE"
-                        stroke-dasharray="6 4"
+                        strokeDasharray="6 4"
                       />
                     </svg>
                   ) : null}

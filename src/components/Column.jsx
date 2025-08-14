@@ -45,7 +45,7 @@ export default function Column({ children, status }) {
       <SColumnTitle>
         <p>{status}</p>
       </SColumnTitle>
-      <Droppable droppableId={status} type="COLUMN">
+      <Droppable droppableId={status} type="COLUMN" direction={window.innerWidth <= 1200 ? "horizontal" : "vertical"}>
         {(provided) => (
           <SCards {...provided.droppableProps} ref={provided.innerRef}>
             {children}

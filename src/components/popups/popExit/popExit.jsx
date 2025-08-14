@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   SPopExit,
   SPopExitBlock,
@@ -8,7 +9,11 @@ import {
   PopExitTTL,
 } from "./_popExit.style";
 
-export default function PopExit() {
+export default function PopExit({ setIsAuth }) {
+  const handleOut = (e) => {
+    e.preventDefault();
+    setIsAuth(false);
+  }
   return (
     <SPopExit>
       <SPopExitContainer>
@@ -18,11 +23,11 @@ export default function PopExit() {
           </PopExitTTL>
           <form className="pop-exit__form" id="formExit" action="#">
             <PopExitFormGroup>
-              <PopExitBtnYes className="_hover01" id="exitYes">
-                <a href="modal/signin.html">Да, выйти</a>
+              <PopExitBtnYes className="_hover01" onClick={handleOut}>
+                <a>Да, выйти</a>
               </PopExitBtnYes>
-              <PopExitBtnNo className="_hover03" id="exitNo">
-                <a href="main.html">Нет, остаться</a>
+              <PopExitBtnNo className="_hover03">
+                <Link to="/">Нет, остаться</Link>
               </PopExitBtnNo>
             </PopExitFormGroup>
           </form>

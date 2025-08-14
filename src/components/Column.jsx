@@ -48,9 +48,9 @@ export default function Column({ status, cards }) {
       <SCards>
         {cards.map((card) => (
           <Card
-            key={card.id}
-            id={card.id}
-            theme={card.theme}
+            key={card._id}
+            id={card._id}
+            topic={card.topic}
             title={card.title}
             date={card.date}
           />

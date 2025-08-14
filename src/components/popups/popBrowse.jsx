@@ -1,8 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
+import useTasks from "../../context/TaskContext/useTasks";
+
 import Calendar from "../Calendar";
-import { deleteTask, updateTask } from "../../services/api/tasksService";
+import { useEffect, useState } from "react";
 
 export default function PopBrowse() {
+  const [cardData, setCardData] = useState(null);
+  const { deleteCard, notFiltredCards } = useTasks();
+  const navigate = useNavigate();
+  const params = useParams();
+
+  useEffect(() => {
+    const card = notFiltredCards.find((card) => card._id === params.id);
+    console.log(notFiltredCards, card, params.id);
+
+    setCardData(card);
+  }, [params.id]);
+
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
@@ -11,17 +26,17 @@ export default function PopBrowse() {
             <div className="pop-browse__top-block">
               <h3 className="pop-browse__ttl">Название задачи</h3>
               <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">Web Design</p>
+                <p className="_orange">{cardData && cardData.topic}</p>
               </div>
             </div>
             <div className="pop-browse__status status">
               <p className="status__p subttl">Статус</p>
               <div className="status__themes">
                 <div className="status__theme _hide">
-                  <p>Без статуса</p>
+                  <p>{cardData && cardData.title}</p>
                 </div>
                 <div className="status__theme _gray">
-                  <p className="_gray">Нужно сделать</p>
+                  <p className="_gray">{cardData && cardData.status}</p>
                 </div>
                 <div className="status__theme _hide">
                   <p>В работе</p>
@@ -50,12 +65,13 @@ export default function PopBrowse() {
                     id="textArea01"
                     readOnly
                     placeholder="Введите описание задачи..."
+                    value={cardData && cardData.description}
                   ></textarea>
                 </div>
               </form>
               <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
-                <Calendar />
+                <Calendar date={cardData?.date} />
               </div>
             </div>
             <div className="theme-down__categories theme-down">
@@ -69,7 +85,13 @@ export default function PopBrowse() {
                 <button className="btn-browse__edit _btn-bor _hover03">
                   <a href="#">Редактировать задачу</a>
                 </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
+                <button
+                  className="btn-browse__delete _btn-bor _hover03"
+                  onClick={() => {
+                    deleteCard(params.id);
+                    navigate("/");
+                  }}
+                >
                   <a href="#">Удалить задачу</a>
                 </button>
               </div>

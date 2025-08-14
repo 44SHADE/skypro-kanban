@@ -1,5 +1,9 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { login } from "../../services/api/auth/login";
+import { validateAuthForms } from "../../utils/validateForm";
+import useAuth from "../../context/AuthContext/useAuth";
 
 import {
   Wrapper,
@@ -12,12 +16,10 @@ import {
   ModalInput,
   ModalTTL,
 } from "./_signIn.style";
-import { useState } from "react";
-import { addUserToLocalStorage } from "../../utils/localStorage";
-import { validateAuthForms } from "../../utils/validateForm";
 
-export default function SignIn({ setIsAuth }) {
+export default function SignIn() {
   const [formData, setFormData] = useState({ login: "", password: "" });
+  const { loginState } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -34,8 +36,8 @@ export default function SignIn({ setIsAuth }) {
     }
     login(formData)
       .then((res) => {
-        addUserToLocalStorage(res.data.user);
-        setIsAuth(true);
+        const user = res.data.user;
+        loginState(user);
         navigate("/");
       })
       .catch((error) => alert(error));

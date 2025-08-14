@@ -1,7 +1,10 @@
+import useTasks from "../context/TaskContext/useTasks";
 import { useEffect,useState } from "react";
+import styled from "styled-components";
+
+import Column from "../components/Column";
 
 import SContainer from "./style/containerStyle";
-import styled from "styled-components";
 
 const SMain = styled.main`
   width: 100%;
@@ -29,13 +32,30 @@ const SMainContent = styled.div`
   display: flex;
 `;
 
-export default function Main({ children, loading }) {
-  return (
+export default function Main() {
+  const { cards, loading } = useTasks();
+
+  return loading ? (
+    <p style={{ textAlign: "center", paddingTop: "10px" }}>Данные загружаются...</p>
+  ) : (
     <SMain>
       <SContainer>
         <SMainBlock>
           <SMainContent>
-            {loading ? <p>Данные загружаются...</p> : children}
+            {cards.length !== 0 ? (
+              cards.map((card) => (
+                <Column
+                  key={card.status}
+                  status={card.status}
+                  cards={card.data}
+                />
+              ))
+            ) : (
+              <p style={{ color: "rgb( 145, 102, 187)", textAlign: "center" }}>
+                Кажется, Вы пока не создали ни одной задачи! Нажмите "Создать
+                новую задачу" и она появится здесь!
+              </p>
+            )}
           </SMainContent>
         </SMainBlock>
       </SContainer>

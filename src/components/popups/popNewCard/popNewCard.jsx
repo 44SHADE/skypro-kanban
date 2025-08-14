@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Link, useOutletContext, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Calendar from "../../Calendar";
 import Category from "./Categories";
 
 import { createNewTask } from "../../../services/api/tasksService";
 import filterCardsByStatus from "../../../utils/cardFilter";
+import useTasks from "../../../context/TaskContext/useTasks";
 
 export default function PopNewCard() {
   const navigate = useNavigate();
-  const [setCards, statuses] = useOutletContext();
+  const { setCards, statuses } = useTasks();
   const [isActive, setIsActive] = useState(-1);
   const [formData, setFormData] = useState({
     title: "",
@@ -24,7 +25,7 @@ export default function PopNewCard() {
 
   const handleActiveCategoryClick = (e, index) => {
     const { textContent } = e.target;
-    const attributeTopic = e.target.getAttribute("name");    
+    const attributeTopic = e.target.getAttribute("name");
     setIsActive(index);
     setFormData({ ...formData, [attributeTopic]: textContent });
   };
@@ -109,7 +110,11 @@ export default function PopNewCard() {
                 />
               </div>
             </div>
-            <button className="form-new__create _hover01" id="btnCreate" onClick={createTask}>
+            <button
+              className="form-new__create _hover01"
+              id="btnCreate"
+              onClick={createTask}
+            >
               Создать задачу
             </button>
           </div>

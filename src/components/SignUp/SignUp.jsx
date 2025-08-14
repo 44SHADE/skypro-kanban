@@ -1,4 +1,9 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import { register } from "../../services/api/auth/register";
+import { validateAuthForms } from "../../utils/validateForm";
+
 import {
   Wrapper,
   ContainerSignUp,
@@ -10,9 +15,6 @@ import {
   ModalInput,
   ModalTTL,
 } from "./_signUp.style";
-import { useState } from "react";
-import { register } from "../../services/api/auth/register";
-import { validateAuthForms } from "../../utils/validateForm";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -37,7 +39,7 @@ export default function SignUp() {
 
     register(formData)
       .then(() => navigate("/login"))
-      .catch((err) => alert(err.response.data.error));
+      .catch((error) => alert(error));
   };
   return (
     <Wrapper>

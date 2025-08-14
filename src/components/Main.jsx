@@ -1,3 +1,5 @@
+import { useEffect,useState } from "react";
+
 import SContainer from "./style/containerStyle";
 import styled from "styled-components";
 

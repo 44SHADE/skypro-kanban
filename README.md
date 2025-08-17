@@ -27,6 +27,6 @@ start project
 
 ![](gif/drag-and-drop.gif)
 
-### Dnd
+### Смена темы
 
 ![](gif/change-theme.gif)

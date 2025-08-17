@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { register } from "../../services/api/auth/register";
 import { validateAuthForms } from "../../utils/validateForm";
+import { notify, SToastContainer } from "../../shared/notifications";
 
 import {
   Wrapper,
@@ -33,13 +34,13 @@ export default function SignUp() {
     e.preventDefault();
     const isValid = validateAuthForms(formData);
     if (!isValid) {
-      alert("Заполните все поля!");
+      notify("Ой!", "Заполните все поля!", "warning")
       return null;
     }
 
     register(formData)
       .then(() => navigate("/login"))
-      .catch((error) => alert(error));
+      .catch((error) => error);
   };
   return (
     <Wrapper>
@@ -88,6 +89,7 @@ export default function SignUp() {
             </ModalFormLogin>
           </ModalBlock>
         </Modal>
+        <SToastContainer />
       </ContainerSignUp>
     </Wrapper>
   );

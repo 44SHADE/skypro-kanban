@@ -3,10 +3,19 @@ import styled from "styled-components";
 const SHeader = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.bgSecond};
 `;
 
 const SHeaderBlock = styled.div`
+  @media screen and (max-width: 430px) {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+
   height: 70px;
   display: flex;
   flex-wrap: nowrap;

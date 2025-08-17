@@ -1,4 +1,4 @@
-import Card from "./Card/Card";
+import { Droppable } from "@hello-pangea/dnd";
 import styled from "styled-components";
 
 const SMainColumn = styled.div`
@@ -39,23 +39,20 @@ const SCards = styled.div`
 }
 `;
 
-export default function Column({ status, cards }) {
+export default function Column({ children, status }) {
   return (
     <SMainColumn>
       <SColumnTitle>
         <p>{status}</p>
       </SColumnTitle>
-      <SCards>
-        {cards.map((card) => (
-          <Card
-            key={card._id}
-            id={card._id}
-            topic={card.topic}
-            title={card.title}
-            date={card.date}
-          />
-        ))}
-      </SCards>
+      <Droppable droppableId={status} type="COLUMN" direction={window.innerWidth <= 1200 ? "horizontal" : "vertical"}>
+        {(provided) => (
+          <SCards {...provided.droppableProps} ref={provided.innerRef}>
+            {children}
+            {provided.placeholder}
+          </SCards>
+        )}
+      </Droppable>
     </SMainColumn>
   );
 }

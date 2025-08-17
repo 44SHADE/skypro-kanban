@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { createNewTask } from "../../../services/api/tasksService";
+import { notify } from "../../../shared/notifications";
+import useTasks from "../../../context/TaskContext/useTasks";
+
 import Calendar from "../../Calendar";
 import Category from "./Categories";
 
-import { createNewTask } from "../../../services/api/tasksService";
-import filterCardsByStatus from "../../../utils/cardFilter";
-import useTasks from "../../../context/TaskContext/useTasks";
-
 export default function PopNewCard() {
   const navigate = useNavigate();
-  const { setCards, statuses } = useTasks();
+  const { setCards } = useTasks();
   const [isActive, setIsActive] = useState(-1);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     topic: "",
+    date: "",
   });
 
   const handleInputChange = (e) => {
@@ -33,11 +34,11 @@ export default function PopNewCard() {
   const createTask = () => {
     createNewTask(formData)
       .then((req) => {
-        const cards = filterCardsByStatus(statuses, req.data.tasks);
-        setCards(cards);
+        setCards(req.data.tasks);
+        notify("Успех!", "Задача добавлена", "success")
         navigate("/");
       })
-      .catch((err) => alert(err));
+      .catch((err) => err);
   };
 
   return (
@@ -84,7 +85,7 @@ export default function PopNewCard() {
               </form>
               <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
-                <Calendar />
+                <Calendar cardData={formData} setCardData={setFormData} isEditing={true}/>
               </div>
             </div>
             <div className="pop-new-card__categories categories">

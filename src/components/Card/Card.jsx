@@ -13,24 +13,22 @@ import {
 } from "./_card.style";
 import CardTheme from "./CardTheme";
 
-export default function Card({ id, topic, title, date }) {
+export default function Card({ id, topic, title, date, snapshot, ...draggableProps }) {
   return (
-    <SCardsItem key={id}>
-      <SCardsCard>
+    <SCardsItem key={id} {...draggableProps}>
+      <SCardsCard $isDragging={snapshot.isDragging}>
         <SCardGroup>
           <CardTheme topic={topic} />
-          <a target="_self">
+          <Link to={"/card/" + id}>
             <CardBtn>
               <CardBtnDiv />
               <CardBtnDiv />
               <CardBtnDiv />
             </CardBtn>
-          </a>
+          </Link>
         </SCardGroup>
         <SCardContent>
-          <Link to={"/card/" + id}>
-            <CardTitle>{title}</CardTitle>
-          </Link>
+          <CardTitle>{title}</CardTitle>
           <CardDate>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +58,7 @@ export default function Card({ id, topic, title, date }) {
                 </clipPath>
               </defs>
             </svg>
-            <p>{format(date, "dd.mm.yy")}</p>
+            <p>{date ? format(date, "dd.MM.yy") : "01.01.1994"}</p>
           </CardDate>
         </SCardContent>
       </SCardsCard>

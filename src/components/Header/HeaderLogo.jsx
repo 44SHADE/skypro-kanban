@@ -1,16 +1,22 @@
+import { useTheme } from "styled-components";
+
 export default function HeaderLogo() {
+  const theme = useTheme();
   return (
     <>
-      <div className="header__logo _show _light">
-        <a href="" target="_self">
-          <img src="images/logo.png" alt="logo" />
-        </a>
-      </div>
-      <div className="header__logo _dark">
-        <a href="" target="_self">
-          <img src="images/logo_dark.png" alt="logo" />
-        </a>
-      </div>
+      {theme.name === "light" ? (
+        <div className="header__logo">
+          <a href="" target="_self">
+            <img src="/images/logo.png" alt="logo" />
+          </a>
+        </div>
+      ) : (
+        <div className="header__logo">
+          <a href="" target="_self">
+            <img src="/images/logo_dark.png"  alt="logo" />
+          </a>
+        </div>
+      )}
     </>
   );
 }

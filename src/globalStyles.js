@@ -33,7 +33,18 @@ body {
   width: 100%;
   height: 100%;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
-  color: #000000;
+  color: ${(props) => props.theme.fontColor};
+}
+
+@keyframes card-animation {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+  }
 }
 
 ._hover01:hover {
@@ -49,7 +60,13 @@ body {
 }
 
 ._hover03:hover {
-  background-color: #33399b;
+  ${(props) => {
+    if (props.theme.name === "light") {
+      return `background-color: ${props.theme.colors.hover2};`;
+    } else {
+      return `background-color: ${props.theme.colors.hover2}; border-color: ${props.theme.hover2};`;
+    }
+  }}
   color: #FFFFFF;
 }
 ._hover03:hover a {
@@ -57,18 +74,18 @@ body {
 }
 
 ._orange {
-  background-color: #FFE4C2;
-  color: #FF6D00;
+  background-color: ${(props) => props.theme.colors.categories.orange.bg};
+  color: ${(props) => props.theme.colors.categories.orange.textColor};
 }
 
 ._green {
-  background-color: #B4FDD1;
-  color: #06B16E;
+  background-color: ${(props) => props.theme.colors.categories.green.bg};
+  color: ${(props) => props.theme.colors.categories.green.textColor};
 }
 
 ._purple {
-  background-color: #E9D4FF;
-  color: #9A48F1;
+  background-color: ${(props) => props.theme.colors.categories.purple.bg};
+  color: ${(props) => props.theme.colors.categories.purple.textColor};
 }
 
 ._gray {
@@ -86,13 +103,14 @@ body {
 
 ._btn-bor {
   border-radius: 4px;
-  border: 0.7px solid var(--palette-navy-60, #565EEF);
+  border: 0.7px solid ${(props) =>
+    props.theme.name === "light" ? "#565EEF" : "#FFFFFF"};
   outline: none;
   background: transparent;
   color: #565EEF;
 }
 ._btn-bor a {
-  color: #565EEF;
+  color: ${(props) => (props.theme.name === "light" ? "#565EEF" : "#FFFFFF")};
 }
 
 ._btn-bg {
@@ -134,12 +152,12 @@ body {
 .pop-new-card__block {
   display: block;
   margin: 0 auto;
-  background-color: #FFFFFF;
+  background-color: ${(props) => props.theme.colors.bgSecond};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 48px;
   border-radius: 10px;
-  border: 0.7px solid #D4DBE5;
+  border: 0.7px solid ${(props) => props.theme.colors.border};
   position: relative;
 }
 .pop-new-card__content {
@@ -147,7 +165,7 @@ body {
   text-align: left;
 }
 .pop-new-card__ttl {
-  color: #000;
+  color: ${(props) => props.theme.fontColor};
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
@@ -161,7 +179,7 @@ body {
   cursor: pointer;
 }
 .pop-new-card__close:hover {
-  color: #000000;
+  color: ${(props) => props.theme.fontColor};
 }
 .pop-new-card__wrap {
   display: flex;
@@ -189,6 +207,7 @@ body {
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
+  color: ${(props) => props.theme.fontColor}
 }
 .form-new__input::-moz-placeholder, .form-new__area::-moz-placeholder {
   font-weight: 400;
@@ -227,7 +246,7 @@ body {
 }
 
 .subttl {
-  color: #000;
+  color: ${(props) => props.theme.fontColor};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
@@ -247,7 +266,7 @@ body {
   line-height: 1;
 }
 .calendar__p span {
-  color: #000000;
+  color: ${(props) => props.theme.fontColor};
 }
 .calendar__block {
   display: block;
@@ -278,7 +297,7 @@ body {
 }
 .calendar__cells {
   width: 182px;
-  height: 126px;
+  height: 141px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -331,16 +350,18 @@ body {
 }
 
 ._cell-day:hover {
-  color: #94A6BE;
-  background-color: #EAEEF6;
+  ${(props) =>
+    props.theme.name === "light" ? `color: #94A6BE` : "color: #fff"};
+  background-color: ${(props) => props.theme.colors.hover};
 }
 
 ._active-day {
   background-color: #94A6BE;
-  color: #FFFFFF;
+  color: ${(props) => props.theme.colors.textColor};
 }
 
 ._current {
+  color:${(props) => props.theme.name === "light" ? `rgb(82, 90, 101)` : "#fff"};
   font-weight: 700;
 }
 
@@ -396,12 +417,12 @@ body {
 .pop-browse__block {
   display: block;
   margin: 0 auto;
-  background-color: #FFFFFF;
+  background-color: ${(props) => props.theme.colors.bgSecond};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 38px;
   border-radius: 10px;
-  border: 0.7px solid #D4DBE5;
+  border: 0.7px solid ${(props) => props.theme.colors.border};
   position: relative;
 }
 .pop-browse__content {
@@ -425,7 +446,7 @@ body {
   margin-bottom: 18px;
 }
 .pop-browse__ttl {
-  color: #000;
+  color: ${(props) => props.theme.fontColor};
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
@@ -465,7 +486,7 @@ body {
   width: 100%;
   outline: none;
   padding: 14px;
-  background: #EAEEF6;
+  background:${(props) => props.theme.colors.bgBrowseArea};
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   border-radius: 8px;
   font-size: 14px;
@@ -473,6 +494,7 @@ body {
   letter-spacing: -0.14px;
   margin-top: 14px;
   height: 200px;
+  color: ${(props) => props.theme.fontColor};
 }
 .form-browse__area::-moz-placeholder {
   font-weight: 400;

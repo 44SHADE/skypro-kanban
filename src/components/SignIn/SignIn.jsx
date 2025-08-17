@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import useAuth from "../../context/AuthContext/useAuth";
 import { login } from "../../services/api/auth/login";
 import { validateAuthForms } from "../../utils/validateForm";
-import useAuth from "../../context/AuthContext/useAuth";
+import { notify, SToastContainer } from "../../shared/notifications";
 
 import {
   Wrapper,
@@ -21,7 +22,7 @@ export default function SignIn() {
   const [formData, setFormData] = useState({ login: "", password: "" });
   const { loginState } = useAuth();
   const navigate = useNavigate();
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -31,7 +32,7 @@ export default function SignIn() {
     e.preventDefault();
     const isValid = validateAuthForms(formData);
     if (!isValid) {
-      alert("Заполните все поля!");
+      notify("Ой!", "Заполните все поля!", "warning");
       return null;
     }
     login(formData)
@@ -40,7 +41,7 @@ export default function SignIn() {
         loginState(user);
         navigate("/");
       })
-      .catch((error) => alert(error));
+      .catch((error) => error);
   };
   return (
     <Wrapper>
@@ -77,6 +78,7 @@ export default function SignIn() {
             </ModalFormLogin>
           </ModalBlock>
         </Modal>
+        <SToastContainer />
       </ContainerSignIn>
     </Wrapper>
   );

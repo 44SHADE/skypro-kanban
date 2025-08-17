@@ -5,7 +5,7 @@ const SWrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: ${(props) => props.theme.colors.bg};
 `;
 
 export default function Wrapper({ children }) {

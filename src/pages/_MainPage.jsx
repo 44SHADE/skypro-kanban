@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import TasksProvider from "../context/TaskContext/TasksProvider";
+import { SToastContainer } from "../shared/notifications";
 
 import Header from "../components/Header/Header";
 import Main from "../components/Main";
@@ -18,6 +19,7 @@ const MainPage = () => {
         <Header onShow={() => setShowPop(!showPop)} />
         <Main />
         <Outlet />
+        <SToastContainer />
       </Wrapper>
     </TasksProvider>
   );
